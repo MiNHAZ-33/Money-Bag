@@ -19,6 +19,16 @@ class ValidationRules {
     }
   }
 
+    static String? money(String? text) {
+    if (text == null || text.isEmpty) {
+      return 'Please enter your text here';
+    } else if (int.tryParse(text) == null) {
+      return 'Enter a valid numbers';
+    } else {
+      return null;
+    }
+  }
+
   static String? regular(String? text) {
     if (text == null || text.isEmpty) {
       return 'Please enter your text here';

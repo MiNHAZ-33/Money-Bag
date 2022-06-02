@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class Transaction extends Equatable {
@@ -36,7 +37,7 @@ class Transaction extends Equatable {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'amount': amount,
-      'time': time.millisecondsSinceEpoch,
+      'time': Timestamp.fromDate(time),
       'source': source,
       'transactionType': transactionType,
       'note': note,
@@ -46,7 +47,9 @@ class Transaction extends Equatable {
   factory Transaction.fromMap(Map<String, dynamic> map) {
     return Transaction(
       amount: map['amount'] as double,
-      time: DateTime.fromMillisecondsSinceEpoch(map['time'] as int),
+      time: map['time'] != null
+          ? (map['time'] as Timestamp).toDate()
+          : DateTime.now(),
       source: map['source'] as String,
       transactionType: map['transactionType'] as String,
       note: map['note'] as String,
@@ -55,7 +58,8 @@ class Transaction extends Equatable {
 
   String toJson() => json.encode(toMap());
 
-  factory Transaction.fromJson(String source) => Transaction.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Transaction.fromJson(String source) =>
+      Transaction.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   bool get stringify => true;

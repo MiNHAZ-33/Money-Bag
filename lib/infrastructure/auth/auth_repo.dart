@@ -56,7 +56,7 @@ class AuthRepo extends IAuthRepo {
               email: body.email,
               sources: [
                 Source(
-                  name: body.name,
+                  name: 'Cash',
                   createdAt: DateTime.now(),
                 ),
               ],
