@@ -31,7 +31,7 @@ class HomePage extends ConsumerWidget {
       if (previous != next) {
         if (next.failure != CleanFailure.none()) {
           CleanFailureDialogue.show(context, failure: next.failure);
-        } 
+        }
       }
     });
 
@@ -39,6 +39,13 @@ class HomePage extends ConsumerWidget {
       backgroundColor: Colors.deepPurple[50],
       appBar: AppBar(
         title: const Text('Money Bag'),
+        actions: [
+          IconButton(
+              onPressed: () {
+                ref.read(authProvider.notifier).logout();
+              },
+              icon: const Icon(Icons.logout_sharp))
+        ],
       ),
       body: ListView(
         children: [
@@ -48,7 +55,7 @@ class HomePage extends ConsumerWidget {
       floatingActionButton: ElevatedButton(
         child: const Text('Log Out'),
         onPressed: () {
-          // ref.read(authProvider.notifier).logout();
+          //
           showDialog(
             context: context,
             builder: (context) {

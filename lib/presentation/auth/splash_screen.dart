@@ -1,7 +1,5 @@
 import 'package:clean_api/clean_api.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:moneybook/application/auth/auth_provider.dart';
@@ -35,25 +33,26 @@ class SplashScreen extends HookConsumerWidget {
               builder: (context) => LoginPage(),
             ),
           );
+        } else {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => const HomePage(),
+            ),
+          );
         }
-        else {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => HomePage(),
-          ),
-        );
       }
-      } 
     });
     return Scaffold(
-      body: Column(
-        children: const [
-          Text(
-            'Moneybag',
-            style: TextStyle(fontSize: 40),
-          ),
-          CircularProgressIndicator(),
-        ],
+      body: Center(
+        child: Column(
+          children: const [
+            Text(
+              'Moneybag',
+              style: TextStyle(fontSize: 40),
+            ),
+            CircularProgressIndicator(),
+          ],
+        ),
       ),
     );
   }

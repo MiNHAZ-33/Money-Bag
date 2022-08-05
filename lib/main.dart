@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:moneybook/firebase_options.dart';
 import 'package:moneybook/presentation/auth/login_page.dart';
+import 'package:moneybook/presentation/auth/splash_screen.dart';
 import 'package:moneybook/presentation/home/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
     const ProviderScope(
       child: MyApp(),
@@ -29,7 +28,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),
-      home: LoginPage(),
+      home: const SplashScreen(),
     );
   }
 }
